@@ -58,7 +58,8 @@ sdr_data <- read_csv(here("data/SDR-2023-Data.csv"))
 Use the `clean_names` function from the janitor package to clean up the column names of our dataframe. 
 
 ```{r}
-sdr_data <- sdr_data %>% 
+sdr_data <- 
+  sdr_data %>% 
   clean_names()
 ```
 
@@ -92,8 +93,7 @@ In the following code, we're:
   - Using `geom_point()` to make a scatter plot where each point is a country and it's location on the graph is based on the country's SDG 3 scores and SDG 4 scores
 
 ```{r}
-ggplot(data = sdr_data, aes(x= goal_3_score, y = goal_4_score)) +
-  geom_point()
+ggplot(data = sdr_data, aes(x= goal_3_score, y = goal_4_score)) + geom_point()
 ```
 
 Awesome! What if we wanted to color the points/countries based on their region? Let's use the `color` argument to add some color to do so.
@@ -117,7 +117,7 @@ Let's create one more scatter plot!
 
 - So far we have only colored by the *categorical* variable region.
   
-  - We can also color by *continuous* variables like the other SDG Scores.
+  - We can also color by *continuous* variables like the other SDG Scores.  
     
     - Let's pass goal_5_score to the color argument to color each point/country based on their SDG 5 score.
     
@@ -130,6 +130,11 @@ Cool! It seems that the darkest blue points (countries with the lowest SDG 5 sco
 
 #### <span style="color: red;">Challenge 1</span>
 Create a scatterplot using two different SDG scores. Then, color the points by using a third SDG score. In a couple of sentences, describe what you see.
+```{r}
+ggplot(data = sdr_data, aes(x = goal_9_score, y = goal_8_score, color = goal_12_score)) + geom_point()
+
+# The scatter-plot shows a positive correlation between Goal 9 (Industry, Innovation, and Infrastructure) and Goal 8 (Decent Work and Economic Growth), illustrating that countries with higher innovation and infrastructure scores also tend to have higher economic growth. However, the blue color gradient of Goal 12 (Responsible Consumption and Production) suggests an inverse relationship. Countries with higher Goal 12 scores mostly appear in the lower-left quadratic (low Goal 8 and 9 scores), while those with lower Goal 12 scores cluster towards the upper-right quadratic (high Goal 8 and 9 scores).
+```
 
 ### Bar Chart
 
