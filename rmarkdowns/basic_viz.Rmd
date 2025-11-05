@@ -133,7 +133,8 @@ Create a scatterplot using two different SDG scores. Then, color the points by u
 ```{r}
 ggplot(data = sdr_data, aes(x = goal_9_score, y = goal_8_score, color = goal_12_score)) + geom_point()
 ```
-Interpretation: The scatter-plot shows a positive correlation between Goal 9 (Industry, Innovation, and Infrastructure) and Goal 8 (Decent Work and Economic Growth), illustrating that countries with higher innovation and infrastructure scores also tend to have higher economic growth. However, the blue color gradient of Goal 12 (Responsible Consumption and Production) suggests an inverse relationship. Countries with higher Goal 12 scores mostly appear in the lower-left quadratic (low Goal 8 and 9 scores), while those with lower Goal 12 scores cluster towards the upper-right quadratic (high Goal 8 and 9 scores). This may imply that to reach a high score in goal 8 and 9 may require conceding scores in goal 12.  
+Interpretation: 
+The scatter-plot shows a positive correlation between Goal 9 (Industry, Innovation, and Infrastructure) and Goal 8 (Decent Work and Economic Growth), illustrating that countries with higher innovation and infrastructure scores also tend to have higher economic growth. However, the blue color gradient of Goal 12 (Responsible Consumption and Production) suggests an inverse relationship. Countries with higher Goal 12 scores mostly appear in the lower-left quadratic (low Goal 8 and 9 scores), while those with lower Goal 12 scores cluster towards the upper-right quadratic (high Goal 8 and 9 scores). This may imply that to reach a high score in goal 8 and 9 may require conceding scores in goal 12.  
 
 
 ### Bar Chart
@@ -238,3 +239,9 @@ Countries that fall in the higher end of the Goal 4 spectrum belong to the OECD 
 
 #### <span style="color: red;">Challenge 3</span>
 Make a histogram for a different SDG score. Then, fill by region. In a couple of sentences, describe any interesting trends or what you notice from your new histogram.
+```{r}
+ggplot(sdr_data, aes(x = goal_9_score, fill=regions_used_for_the_sdr)) + 
+  geom_histogram(bins=33, color="black")
+```
+Interpretation: 
+Countries in the Sub-Saharan Africa region fall in the low-end of the goal 9 score specturm; meanwhile, countries in the OECD region fall in the high-end. The rest of the world regions mainly range count the 25-75 score range.
