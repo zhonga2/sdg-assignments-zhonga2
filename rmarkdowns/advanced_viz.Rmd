@@ -172,7 +172,7 @@ This takes a few fun steps to do
 ```{r}
 world <- ne_countries(scale = "medium", returnclass = "sf")
 ```
-
+  
 - Now we have a dataframe named *world* in our environment
   
   - It has 241 locations/countries (rows) and 64 columns describing each location/country
@@ -265,14 +265,14 @@ Awesome! We're ready to make a map
 ```{r}
 mytext <- paste(
     "Country: ", sdr_data_world_joined$country,"<br/>", 
-    "Goal 7 Score: ", round(sdr_data_world_joined$goal_7_score, 2), 
+    "Goal 4 Score: ", round(sdr_data_world_joined$goal_4_score, 2), #Map SDG 4 Score instead of default 7 
     sep="") %>%
   lapply(htmltools::HTML)
 
 leaflet(sdr_data_world_joined) %>% 
   addTiles()  %>% 
   setView( lat=10, lng=0 , zoom=2) %>%
-  addPolygons(stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5, color = ~colorQuantile("YlOrRd", goal_7_score)(goal_7_score), label = mytext)
+  addPolygons(stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5, color = ~colorQuantile("Spectral", goal_4_score)(goal_4_score), label = mytext) # Changed from SDG 7 Score to SDG 4 Score. Furthermore, changed color palette to "Spectral" from "YlOrRd" 
 ```
 #### <span style="color: red;">Challenge 2</span>
 
