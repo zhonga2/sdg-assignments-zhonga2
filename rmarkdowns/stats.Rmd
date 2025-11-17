@@ -197,13 +197,18 @@ To circle back and reinforce how the linear regression (line drawn through our s
   - What does this look like on scatter plot?
   
 ```{r, warning=FALSE, message=FALSE}
-ggplot(sdr_data, aes(x = goal_12_score, 
-                     y = goal_9_score)) +
+correlation_plot <- ggplot(sdr_data, aes(x = goal_1_score,   # Replaced from default Goal_12_score to Goal_1_score (Poverty)
+                     y = goal_3_score, label=country)) + # Replaced from default Goal_9_score to Goal_3_score (Good Health and Well-Being)
   geom_point() +
   geom_smooth() +
-  stat_cor() +
-  theme_minimal() 
+  stat_cor(output.type = "text") +
+  theme_minimal() +
+  labs(title="Correlation between SDG 1 Score and SDG 3 score",
+       x = "SDG 1 Score (No Poverty)",
+       y = "SDG 3 Score (Good Health and Well-Being)"
+       ) # Added labels to assist with plot interaction 
 
+ggplotly(correlation_plot, tooltip = "label") # Added interactive plot function
 ```
 
 ### <span style="color: red;">Challenge 1</span>
@@ -220,3 +225,7 @@ ggplot(sdr_data, aes(x = goal_12_score,
       - are there any points that don't follow the trend (outliers)
         
         - which country(s) are outliers?
+
+Hypothesis: I predict there will be a strong, positive correlation between SDG 1 Score (No Poverty) as the independent variable and SDG 3 Score (Good Health and Well-Being. After plotting the graph, it shows that I am correct with the correlation statistic being $R^2 = 0.87$ which implies both a positive relationship (there is no negative sign) and being a strong one (Close to maximum of 1). Countries like Venezuela or Uzbekistan don't follow the trend within the confidence interval and are outliers. This is because they have higher poverty rates (lower end of No Poverty x-axis), but yet boost a significantly higher actual value than the smooth trendline has predicted. 
+      
+      
