@@ -47,7 +47,6 @@ sdr_data <- read_csv(here("data/SDR-2023-Data.csv"))
 ```
 
 Clean column names
-
 ```{r}
 sdr_data <- sdr_data %>% 
   clean_names()
@@ -75,12 +74,12 @@ We start with the same exact code and add to it with `+`
 ```{r, message=FALSE, warning=FALSE}
 ggplot(sdr_data, aes(x = goal_4_score, fill=regions_used_for_the_sdr)) +
   geom_histogram() +
-  theme_minimal() +
-  scale_fill_viridis_d() +
-  labs(title = "Distributions of SDG 4 Scores",
+  theme_minimal() + # The addition of a theme
+  scale_fill_viridis_d() + # The addition of a color palette 
+  labs(title = "Distributions of SDG 4 Scores",  
        x = "SDG 4 Score",
        y = "Number of Countries",
-       fill = "Region")
+       fill = "Region") # The addition of labels
   
 ```
 
@@ -105,6 +104,7 @@ Interactive visualizations are a really exciting part of data science! Interacti
    
       
 ```{r}
+# Assigned histogram plot with name
 goal_4_histogram <- ggplot(sdr_data, aes(x = goal_4_score, fill=regions_used_for_the_sdr)) +
   geom_histogram() +
   theme_minimal() +
@@ -114,6 +114,7 @@ goal_4_histogram <- ggplot(sdr_data, aes(x = goal_4_score, fill=regions_used_for
        y = "Number of Countries",
        fill = "Region")
 
+# Use ggplotly interactive graph function
 ggplotly(goal_4_histogram)
 ```
 
@@ -130,8 +131,17 @@ We can also double-click the boxes in the legend to only view the regions we're 
 Here is the code for a scatter plot you made in the last lesson:
 
 ```{r, warning = FALSE}
-ggplot(data = sdr_data, aes(x= goal_3_score, y = goal_4_score, color = regions_used_for_the_sdr)) +
-  geom_point()
+
+scatterPlot <- ggplot(data = sdr_data, aes(x= goal_3_score, y = goal_4_score, color = regions_used_for_the_sdr)) +
+  geom_point() +
+  theme_minimal() + # The addition of a theme with theme_minimal
+  scale_fill_viridis_d() + # The addition of the viridis_d color scale
+  labs(title = "Correlation between SDG 3 and SDG 4 scores",
+       x = "SDG 3 Score",
+       y = "SDG 4 Score",
+       color = "Region") # The addition of appropriate title, x&y-axis label, and legend label
+
+ggplotly(scatterPlot)
 ```
 
 *Edit the code chunk above* that generates the plot to:
